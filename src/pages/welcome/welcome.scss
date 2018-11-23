@@ -1,0 +1,25 @@
+page-welcome {
+    // .scroll-content{
+    //     justify-content: center;
+    //     display: flex!important;
+    //      align-items: center!important;
+    // }
+    .login-background{
+        background: no-repeat fixed center; 
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        background-size: cover;
+        background-image: url('../../assets/img/background.jpg');
+    }
+    .item.item-input {
+        background-color: transparent;
+    }
+
+      .text-input{
+        color: white;
+      }
+        
+}
+[text-color="my-custom-color"] {
+    color: white;
+}
