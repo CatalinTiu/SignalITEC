@@ -10,10 +10,17 @@
         <ion-icon name="menu"></ion-icon>
       </button>
       <ion-title>Side Menu</ion-title>
+      <ion-buttons end>
+          <button ion-button (click)="addMarker()"><ion-icon name="add"></ion-icon>Add Marker</button>
+        </ion-buttons> 
     </ion-navbar>
   </ion-header>
    
   <ion-tabs #myTabs>
     <ion-tab tabIcon="settings" tabTitle="Settings" [root]="tab1"></ion-tab>
     <ion-tab tabIcon="person" tabTitle="Profile" [root]="tab2"></ion-tab>
-  </ion-tabs>`
+  </ion-tabs>
+
+  <ion-content>
+      <div #map id="map"></div> 
+    </ion-content>

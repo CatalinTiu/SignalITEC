@@ -43,9 +43,6 @@ export class WelcomePage {
   {
     this.navCtrl.push(RegisterPage);
   }
-  loginWithFB()
-  {
-
-  }
+  
 
 }
