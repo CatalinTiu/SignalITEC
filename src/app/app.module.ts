@@ -5,6 +5,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import {HTTP} from '@ionic-native/http';
 import { Facebook } from '@ionic-native/facebook';
+import { Geolocation } from '@ionic-native/geolocation';
+
 
 
 
@@ -38,6 +40,7 @@ import { RegisterPage } from '../pages/register/register';
     StatusBar,
     HTTP,
     Facebook,
+    Geolocation,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
