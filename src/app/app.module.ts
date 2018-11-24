@@ -3,10 +3,17 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
+import {HTTP} from '@ionic-native/http';
+import { Facebook } from '@ionic-native/facebook';
+
+
+
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { WelcomePage } from '../pages/welcome/welcome';
+import { RegisterPage } from '../pages/register/register';
+
 
 
 @NgModule({
@@ -14,6 +21,7 @@ import { WelcomePage } from '../pages/welcome/welcome';
     MyApp,
     WelcomePage,
     HomePage,
+    RegisterPage
   ],
   imports: [
     BrowserModule,
@@ -24,9 +32,12 @@ import { WelcomePage } from '../pages/welcome/welcome';
     MyApp,
     WelcomePage,
     HomePage,
+    RegisterPage
   ],
   providers: [
     StatusBar,
+    HTTP,
+    Facebook,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]

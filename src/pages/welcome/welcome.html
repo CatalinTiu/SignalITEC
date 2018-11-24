@@ -19,7 +19,7 @@
         <ion-row justify-content-center>
           <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
             <div text-center>
-              <ion-img src="../../assets/img/cool_logo.png" style="background:transparent"></ion-img>
+              <ion-img src="../assets/img/cool_logo.png" style="background:transparent"></ion-img>
             </div>
             <div padding>
               <ion-item>
@@ -34,8 +34,18 @@
             </div>
       
             <div padding>
-              <button ion-button full round>Login</button>
+              <button ion-button full round (click)="Login()">Login</button>
             </div>
+
+            <div padding>
+              <button ion-button  full round (click)="Register()">Register</button>
+              </div>
+
+            <!-- <div style="text-align: center;">
+                <button ion-button  (click)="loginWithFB()" icon-end>
+                Register with <ion-icon name="logo-facebook"></ion-icon>
+                </button>
+            </div> -->
           </ion-col>
         </ion-row>
       </ion-grid>

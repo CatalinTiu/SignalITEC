@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,ViewController } from 'ionic-angular';
+import { RegisterPage } from '../../pages/register/register';
+import { HomePage } from '../../pages/home/home';
+
 
 /**
  * Generated class for the WelcomePage page.
@@ -15,11 +18,34 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class WelcomePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl:ViewController) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad WelcomePage');
+    let user_key = window.localStorage.getItem("token");
+    if(user_key)
+    {
+      this.navCtrl
+              .push(HomePage)
+              .then(() => {
+                // first we find the index of the current view controller:
+                const index = this.viewCtrl.index;
+                // then we remove it from the navigation stack
+                this.navCtrl.remove(index);
+              });
+    }  }
+
+  Login(){
+
+  }
+
+  Register()
+  {
+    this.navCtrl.push(RegisterPage);
+  }
+  loginWithFB()
+  {
+
   }
 
 }
