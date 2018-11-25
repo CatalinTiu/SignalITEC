@@ -15,6 +15,9 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { WelcomePage } from '../pages/welcome/welcome';
 import { RegisterPage } from '../pages/register/register';
+import { SidemenuPage } from '../pages/sidemenu/sidemenu';
+
+
 
 
 
@@ -23,7 +26,9 @@ import { RegisterPage } from '../pages/register/register';
     MyApp,
     WelcomePage,
     HomePage,
-    RegisterPage
+    SidemenuPage,
+    RegisterPage,
+    
   ],
   imports: [
     BrowserModule,
@@ -34,7 +39,8 @@ import { RegisterPage } from '../pages/register/register';
     MyApp,
     WelcomePage,
     HomePage,
-    RegisterPage
+    SidemenuPage,
+    RegisterPage,
   ],
   providers: [
     StatusBar,

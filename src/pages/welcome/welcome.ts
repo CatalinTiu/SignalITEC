@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,ViewController } from 'ionic-angular';
 import { RegisterPage } from '../../pages/register/register';
-import { HomePage } from '../../pages/home/home';
+import { SidemenuPage } from '../../pages/sidemenu/sidemenu';
 
 
 /**
@@ -26,7 +26,7 @@ export class WelcomePage {
     if(user_key)
     {
       this.navCtrl
-              .push(HomePage)
+              .push(SidemenuPage)
               .then(() => {
                 // first we find the index of the current view controller:
                 const index = this.viewCtrl.index;

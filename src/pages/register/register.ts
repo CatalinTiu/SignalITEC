@@ -6,7 +6,7 @@ import 'rxjs/add/operator/map';
 import { AlertController } from 'ionic-angular';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 import uuid  from 'uuid/v4';
-import { HomePage } from '../../pages/home/home';
+import { SidemenuPage } from '../../pages/sidemenu/sidemenu';
 
 /**
  * Generated class for the RegisterPage page.
@@ -100,7 +100,7 @@ export class RegisterPage {
       
 
       this.navCtrl
-        .push(HomePage)
+        .push(SidemenuPage)
         .then(() => {
           // first we find the index of the current view controller:
           const index = this.viewCtrl.index;
@@ -125,7 +125,7 @@ export class RegisterPage {
       Email: this.RegisterData.value.email,   
       Latitude: 40,
       Longitude: 21,
-      Radius:0,
+      Radius:10,
       Age:this.RegisterData.value.age,
       Gender:this.RegisterData.value.gender,
       Id: this.id_rand,
@@ -136,16 +136,13 @@ export class RegisterPage {
     
 
     this.http.post('http://itec-api.deventure.co/api/Account/Register', params, {'Content-Type':'application/json'}).then(data => {
-    //  window.localStorage.setItem("token", JSON.parse(data.data).token);
-    //  window.localStorage.setItem("profile", JSON.parse(data.data).user);  
-     
-      let alert= this.alertCtrl.create({
-        title:"Data to show",
-        subTitle: JSON.stringify(data)
-      });
-      alert.present();
+    
+      window.localStorage.setItem("token",this.id_rand);
+      
+
+      
     this.navCtrl
-      .push(HomePage)
+      .push(SidemenuPage)
       .then(() => {
         // first we find the index of the current view controller:
         const index = this.viewCtrl.index;
@@ -162,7 +159,11 @@ export class RegisterPage {
       //   buttons: ['Dismiss']
       // });
       // alert.present();  
-      console.log(e);
+       let alert= this.alertCtrl.create({
+         title:"What's the error:",
+         subTitle:e
+       })
+       alert.present();
     });
 
   }

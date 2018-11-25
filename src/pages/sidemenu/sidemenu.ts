@@ -1,7 +1,9 @@
 
 import { Component,ElementRef,ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,AlertController,ModalController } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
+import {HTTP} from '@ionic-native/http';
+
 
 declare var google;
 
@@ -12,7 +14,7 @@ declare var google;
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+
 @Component({
   selector: 'page-sidemenu',
   templateUrl: 'sidemenu.html',
@@ -22,11 +24,23 @@ export class SidemenuPage {
   @ViewChild('map') mapElement: ElementRef;
   map: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public geolocation: Geolocation) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+    public geolocation: Geolocation, 
+    public http:HTTP, public alertCtrl: AlertController,
+    public modalCtrl: ModalController) {
+
   }
+
+
+  
 
   ionViewDidLoad(){
     this.loadMap();
+  }
+
+  presentProfileModal(issue_details) {
+    let profileModal = this.modalCtrl.create('IssueDetailsPage', { Issue: issue_details  });
+    profileModal.present();
   }
 
   addInfoWindow(marker, content){
@@ -36,31 +50,45 @@ export class SidemenuPage {
     });
    
     google.maps.event.addListener(marker, 'click', () => {
-      infoWindow.open(this.map, marker);
+      // infoWindow.open(this.map, marker);
+      this.presentProfileModal(content);
     });
    
   }
 
-  addMarker(){
+  addMarker(markers){
 
-    this.geolocation.getCurrentPosition().then((positiones) => {
+    let latLng = new google.maps.LatLng(markers.Latitude, markers.Longitude);
+
  
       let marker = new google.maps.Marker({
         map: this.map,
         animation: google.maps.Animation.DROP,
-        position: positiones
+        position: latLng
       });
      
-      let content = "<h4>Information!</h4>";         
      
-      this.addInfoWindow(marker, content);
+      this.addInfoWindow(marker, markers );
  
-    }, (err) => {
-      console.log(err);
-    });
+   
  
     
    
+  }
+
+  getMarkers(){
+
+    this.http.get('http://itec-api.deventure.co/api/Issue/GetAll', {}, {'Accept': 'application/json'}).then(data=>{
+
+    let markersies = JSON.parse(data.data);
+      for(let i=0;i<markersies.length;i++)
+      {
+          
+          this.addMarker(markersies[i]);
+      }
+     
+    });
+
   }
  
   loadMap(){
@@ -72,7 +100,9 @@ export class SidemenuPage {
       let mapOptions = {
         center: latLng,
         zoom: 15,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        disableDefaultUI: true
+
       }
  
       this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
@@ -83,14 +113,18 @@ export class SidemenuPage {
         position: latLng
       });
      
-      let content = "<h4>Information!</h4>";         
+      let content = "<h4>Your Location!</h4>";         
      
       this.addInfoWindow(marker, content);
+
+      this.getMarkers();
+
  
     }, (err) => {
       console.log(err);
     });
  
+
  
   }
 
